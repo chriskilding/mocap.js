@@ -1,9 +1,9 @@
 define(function (require) {
 
 	// Import depdendencies.
-	var Broadcaster = require("./Broadcaster");
+	var Broadcaster = require("mocap/datasource/Broadcaster");
 	
-  var user = JSON.parse(require("text!../sample-user.json"));
+  var user = JSON.parse(require("text!mocap/sample-user.json"));
   
   var bcaster;
   

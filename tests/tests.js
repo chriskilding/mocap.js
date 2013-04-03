@@ -16,13 +16,13 @@
     }
   };
   
-  var paths = {
+  /*var paths = {
     zig: '../lib/zig',
     socketio: '../lib/socketio',
     underscore: '../lib/underscore',
     "js-signals": '../lib/js-signals',
     text: '../lib/text'
-  };
+  };*/
 
   // Defer Qunit so RequireJS can work its magic
   // and resolve all modules.
@@ -30,9 +30,11 @@
 
   // Configure RequireJS so it resolves relative module paths
   require.config({
-    baseUrl: '../mocap',
+    baseUrl: '../lib',
     shim: shim,
-    paths: paths
+    paths: {
+      "mocap": "../mocap"
+    }
   });
   //Override if in "dist" mode
   if (location.href.indexOf('-dist') !== -1) {

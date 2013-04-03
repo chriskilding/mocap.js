@@ -2,10 +2,10 @@
 define(function (require) {
 
 	// Import dependencies.
-	var JointUpdater = require("./JointUpdater");
+	var JointUpdater = require("mocap/datasource/JointUpdater");
 	
   // Fixture
-  var user = JSON.parse(require("text!../sample-user.json"));
+  var user = JSON.parse(require("text!mocap/sample-user.json"));
   
   var jUpdater;
   

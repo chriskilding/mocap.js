@@ -1,10 +1,10 @@
 define(function (require) {
 
 	// Import depdendencies.
-	var JointUpdater = require("./JointUpdater");
+	var JointUpdater = require("mocap/datasource/JointUpdater");
 	
   // Fixture
-  var user = JSON.parse(require("text!../sample-user.json"));
+  var user = JSON.parse(require("text!mocap/sample-user.json"));
     
   // PRETEND Broadcaster (we'll keep this around across tests)
   // skips out testing the event system
