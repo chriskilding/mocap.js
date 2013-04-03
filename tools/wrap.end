@@ -1,14 +1,21 @@
     //Register in the values from the outer closure for common dependencies
     //as local almond modules
-    define('jquery', function () {
-        return $;
+    define('js-signals', function () {
+        return Signal;
     });
     define('underscore', function () {
         return _;
     });
-
-    //Use almond's special top-level, synchronous require to trigger factory
-    //functions, get the final module value, and export it as the public
-    //value.
+    define('socketio', function () {
+        return io;
+    });
+    define('zig', function () {
+        return zig;
+    });
+    
+    //Use almond's special top-level, synchronous require
+    // to trigger factory functions,
+    // get the final module value,
+    // and export it as the public value.
     return require('mocap');
 }));

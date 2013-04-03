@@ -1,7 +1,7 @@
 define([
   'underscore',
   'js-signals',
-  'datasource/JointExtractor'
+  'mocap/datasource/JointExtractor'
 ], function(_, Signal, JointExtractor) {
   
   function JointUpdater(jointId, broadcaster, options) {

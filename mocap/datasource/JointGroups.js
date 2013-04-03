@@ -2,7 +2,7 @@
 // that you might want to examine together
 // to look for patterns
 define([
-  'datasource/Joints'
+  'mocap/datasource/Joints'
 ], function(Joints) {
   
   return {

@@ -13,7 +13,6 @@ define(function (require) {
         Joints: require('mocap/datasource/Joints'),
         JointUpdater: require('mocap/datasource/JointUpdater'),
         NetworkDataSource: require('mocap/datasource/NetworkDataSource'),
-        ZigDataSource: require('mocap/datasource/ZigDataSource'),
-        convert: convert
+        ZigDataSource: require('mocap/datasource/ZigDataSource')
     };
 });

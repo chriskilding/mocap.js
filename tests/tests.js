@@ -1,54 +1,33 @@
 /*global require, define, test, expect, strictEqual, location */
+(function () {
 
-if (typeof require === 'function' && require.config) {
+    // Defer Qunit so RequireJS can work its magic and resolve all modules.
+    QUnit.config.autostart = false;
+
+    // Configure RequireJS so it resolves relative module paths
     require.config({
-        baseUrl: '../lib',
-        paths: {
-            //Path relative to baseUrl
-            'mocap': '../mocap'
-        },
-        shim: {
-            'underscore': {
-                exports: '_'
-            }
-        }
+      baseUrl: '../mocap'
     });
-
     //Override if in "dist" mode
     if (location.href.indexOf('-dist') !== -1) {
-        //Set location of mocap to the dist location
-        require.config({
-            paths: {
-                'mocap': '../dist/mocap'
-            }
-        });
+      //Set location of mocap to the dist location
+      require.config({
+        paths: {
+          'mocap': '../dist/mocap'
+        }
+      });
     }
-}
 
-(function (root, factory) {
-    'use strict';
+	// A list of all QUnit test Modules.  Make sure you include the `.js` 
+	// extension so RequireJS resolves them as relative paths rather than using
+	// the `baseUrl` value supplied above.
+	var testModules = [
+    "BroadcasterTests.js",
+    "JointUpdaterTests.js",
+    "JointUpdaterDepTests.js"
+	];
+	
+    // Resolve all testModules and then start the Test Runner.
+	require(testModules, QUnit.start);
+}());
 
-    if (typeof define === 'function' && define.amd) {
-        // AMD.
-        define(['mocap', 'jquery'], factory);
-    } else {
-        // Browser globals
-        factory(root.mocap, root.jQuery);
-    }
-}(this, function (mocap, $) {
-    'use strict';
-
-    test('version test', function () {
-        expect(1);
-        strictEqual(mocap.version,
-            '0.0.1, jQuery version is: ' + $.fn.jquery,
-            'Version concatenated');
-    });
-
-    test('conversion test', function () {
-        expect(1);
-        strictEqual(mocap.convert('Harry & Sally'),
-            'Harry &amp; Sally',
-            'Ampersand converted');
-    });
-}));

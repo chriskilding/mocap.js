@@ -12,7 +12,7 @@ var require = {
       deps: [],
       exports: "_"
     },
-    "zigjs": {
+    "zig": {
       deps: [],
       exports: "zig"  //attaches "zig" to the window object
     },
@@ -22,11 +22,10 @@ var require = {
     }
   },
   paths: {
-     zigjs: '//cdn.zigfu.com/zigjs/zig.min',
-    //zigjs: 'vendor/zig',
-    underscore: '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min',
-    socketio: '//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.10/socket.io.min',
-    'js-signals': '//cdnjs.cloudflare.com/ajax/libs/js-signals/0.8.1/js-signals.min',
+    zig: '../lib/zig',
+    socketio: '../lib/socketio',
+    underscore: '../lib/underscore',
+    "js-signals": '../lib/js-signals',
     text: '//cdnjs.cloudflare.com/ajax/libs/require-text/2.0.5/text'
   }
 };

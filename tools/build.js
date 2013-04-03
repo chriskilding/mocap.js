@@ -4,7 +4,7 @@
         "mocap": "../mocap"
     },
     "include": ["../tools/almond", "mocap"],
-    "exclude": ["jquery", "underscore"],
+    "exclude": ["js-signals", "underscore", "socketio", "zig"],
     "out": "../dist/mocap.js",
     "wrap": {
         "startFile": "wrap.start",

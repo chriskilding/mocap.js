@@ -1,7 +1,7 @@
 // The zig plugin wrapper
 define([
- 'zigjs',
- 'datasource/Joints'
+ 'zig',
+ 'mocap/datasource/Joints'
 ], function(zig, Joints) {
   
   var zigObj = zig.findZigObject();
