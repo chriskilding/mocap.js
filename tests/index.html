@@ -3,9 +3,18 @@
 <head>
     <meta charset="UTF-8" />
     <title>Test Suite</title>
-    <link rel="stylesheet" href="qunit.css">
-    <script src="qunit.js"></script>
-    <script src="../lib/require.js"></script>
+
+	<!-- QUnit includes -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/qunit/1.11.0/qunit.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/qunit/1.11.0/qunit.js"></script>
+    
+    <!-- Sinon includes -->
+    <script type="text/javascript" src="vendor/sinon-1.6.0.js"></script>
+    <script type="text/javascript" src="vendor/sinon-qunit-1.0.0.js"></script>
+
+	<!-- Load RequireJS & the testsuite -->
+	<script src="../mocap/require-config.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.4/require.js" data-main="tests.js"></script>
     <script>
         QUnit.config.autostart = false;
         require(['tests'], function () {

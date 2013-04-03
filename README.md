@@ -1,76 +1,24 @@
-# example-libglobal
+# mocap.js
+3D motion capture in Javascript, which abstracts several data sources behind a single interface.
 
-This is an example of building a JavaScript library with AMD modules and using
-requirejs while in dev, but then building a file for distribution that does
-not require an AMD loader. The built file will work either with browser globals
-or with an AMD loader.
+## Data source support
+So far, the following sources are supported:
 
-The library also depends on two other libraries:
+- Direct capture from a local copy of the ZigFu zig.js plugin, and locally connected compatible sensor like the Microsoft Kinect.
+- Streaming capture over the network from the reconstruct-o-matic server; if you have a locally installed sensor you can send your data stream up to this server, and receive a reconstructed skeleton from it. If you do not have a local sensor, you can subscribe to that server in read-only mode.
 
-* jQuery, which registers as an AMD library.
-* underscore, which does not register as an AMD library. So the
-[requirejs shim config](http://requirejs.org/docs/api.html#config-shim) is used
-when loading underscore in an AMD setting.
+We plan to add more sources as we progress.
 
-When the library is built, it **excludes** jQuery and underscore from the
-built library. Consumers of the built library will  provide a jQuery and
-underscore for the library. If the consumer uses an AMD loader, then the built
-file will ask for 'jquery' and 'underscore' as AMD dependencies. If the consumer
-just uses browser globals and script tags, the library will grab the `$` and
-`_` global variables and use them for the jQuery and underscore dependencies.
+## Loading the library
+This library can be used either the 'normal' way (with global variables) or with AMD / require.js, where you should require the 'mocap' module for use in your code.
 
-The built library also does not include require.js in the file, but instead
-uses [almond](https://github.com/jrburke/almond), a small AMD API
-implementation, that allows the built file's internal modules to work. These
-internal modules and this version of almond are not visible outside the built
-file, just used internally by the built file for code organization and
-referencing.
+## Dependencies
+**Core dependencies:** this library *must* have access to the following third-party libraries:
 
-## File structure
+- underscore (for some throttling / binding functionality)
+- js-signals (for raising events with mocap data that your app can listen to)
 
-This project creates a library called **mocap.js**. This is just a made
-up name that hopefully is easy to search and replace if you use this as a
-template to create your own library.
+**Optional dependencies:** depending on the data source backends that you choose to work with, the library also needs one or more of the following:
 
-* **dist/mocap.js**: the built library suitable for distribution.
-* **lib**: contains lib scripts used during dev and testing.
-* **tests**: the QUnit-based tests.
-* **tools**: the helper tools/scripts used to build the output file.
-* **mocap**: holds the sub-modules used by the main `mocap.js` module
-to help implement the library's functionality.
-* **mocap.js**: the main module entry point for the source-form of the
-library.
-
-## How to do development
-
-* Modify `mocap.js` and its submodules in the `mocap` directory.
-* Create tests for the functionality in the `tests` directory.
-* Load `tests/index.html` to run the tests.
-
-## How to build the library
-
-The r.js optimizer can be run in Node or Rhino. See the
-[r.js README](https://github.com/jrburke/r.js) for instructions on how to run
-the optimizer in Rhino. For running in Node, run this command in the
-same directory as this README:
-
-    node tools/r.js -o tools/build.js
-
-This will generate the built file in `dist/mocap.js`.
-
-**Test** the built file by running these files:
-
-* **tests/index-dist-amd.html**: For testing the dist version of the library
-with an AMD loader.
-* **tests/index-dist-global.html**: For testing the dist version of the library
-in a "browser globals and script tags" environment.
-
-## What to tell developers of your built library
-
-You can tell them this library can be used with other AMD modules, or it can be
-used in a project that uses browser globals and HTML script tags.
-
-If the library depends on scripts that are not AMD modules (like this example,
-which uses underscore), then you may need to inform developers who use your
-libary what shim config you used if they want to use this library in an AMD
-project.
+- socket.io client, to support streaming mocap data over the network
+- zig.js, if using the ZigFu browser plugin
