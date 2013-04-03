@@ -1,18 +1,19 @@
 /*global define */
 
-/**
- * The main module that defines the public interface for mocap,
- * a made-up library to demonstrate how to construct a source from components.
- */
+// The main module that defines the public interface for mocap.
 define(function (require) {
     'use strict';
 
-    var $ = require('jquery'),
-        convert = require('mocap/convert');
-
     //Return the module value.
     return {
-        version: '0.0.1, jQuery version is: ' + $.fn.jquery,
+        Broadcaster: require('mocap/datasource/Broadcaster'),
+        DataRecorder: require('mocap/datasource/DataRecorder'),
+        JointExtractor: require('mocap/datasource/JointExtractor'),
+        JointGroups: require('mocap/datasource/JointGroups'),
+        Joints: require('mocap/datasource/Joints'),
+        JointUpdater: require('mocap/datasource/JointUpdater'),
+        NetworkDataSource: require('mocap/datasource/NetworkDataSource'),
+        ZigDataSource: require('mocap/datasource/ZigDataSource'),
         convert: convert
     };
 });
