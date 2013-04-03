@@ -22,9 +22,9 @@
 	// extension so RequireJS resolves them as relative paths rather than using
 	// the `baseUrl` value supplied above.
 	var testModules = [
-    "BroadcasterTests.js",
-    "JointUpdaterTests.js",
-    "JointUpdaterDepTests.js"
+    "datasource/BroadcasterTests.js",
+    "datasource/JointUpdaterTests.js",
+    "datasource/JointUpdaterDepTests.js"
 	];
 	
     // Resolve all testModules and then start the Test Runner.
