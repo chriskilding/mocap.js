@@ -1,22 +1,48 @@
 /*global require, define, test, expect, strictEqual, location */
 (function () {
-
-    // Defer Qunit so RequireJS can work its magic and resolve all modules.
-    QUnit.config.autostart = false;
-
-    // Configure RequireJS so it resolves relative module paths
-    require.config({
-      baseUrl: '../mocap'
-    });
-    //Override if in "dist" mode
-    if (location.href.indexOf('-dist') !== -1) {
-      //Set location of mocap to the dist location
-      require.config({
-        paths: {
-          'mocap': '../dist/mocap'
-        }
-      });
+  var shim = {
+    // At this time (Oct 2012) Underscore is not AMD compatible
+    "underscore": {
+      deps: [],
+      exports: "_"
+    },
+    "zig": {
+      deps: [],
+      exports: "zig"  //attaches "zig" to the window object
+    },
+    "socketio": {
+      deps: [],
+      exports: "io"
     }
+  };
+  
+  var paths = {
+    zig: '../lib/zig',
+    socketio: '../lib/socketio',
+    underscore: '../lib/underscore',
+    "js-signals": '../lib/js-signals',
+    text: '../lib/text'
+  };
+
+  // Defer Qunit so RequireJS can work its magic
+  // and resolve all modules.
+  QUnit.config.autostart = false;
+
+  // Configure RequireJS so it resolves relative module paths
+  require.config({
+    baseUrl: '../mocap',
+    shim: shim,
+    paths: paths
+  });
+  //Override if in "dist" mode
+  if (location.href.indexOf('-dist') !== -1) {
+    //Set location of mocap to the dist location
+    require.config({
+      paths: {
+        'mocap': '../dist/mocap'
+      }
+    });
+  }
 
 	// A list of all QUnit test Modules.  Make sure you include the `.js` 
 	// extension so RequireJS resolves them as relative paths rather than using
