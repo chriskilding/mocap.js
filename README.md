@@ -22,3 +22,6 @@ This library can be used either the 'normal' way (with global variables) or with
 
 - socket.io client, to support streaming mocap data over the network
 - zig.js, if using the ZigFu browser plugin
+
+## To build
+Just `cd` into the project directory and run `node tools/r.js -o tools/build.js`. (This is the same as for the example-libglobal project template which this is based on.)
