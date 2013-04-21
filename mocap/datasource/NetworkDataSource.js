@@ -9,48 +9,43 @@
 define([
     'socketio'
 ], function (io) {
-    var socketInstance = io.connect('http://localhost:3000');
-    
-    socketInstance.on('connection', function (socket) {
-        console.log("Socket has been opened!");
-    });
-    
-    socketInstance.on('disconnect', function (socket) {
-        console.log("Socket is closed.");
-    });
-    
-    var sendMessage = function (msg) {
-        socketInstance.emit('request', msg);
-    };
-    
-    var sendCalibrationData = function (msg) {
-        console.log('calibrating');
-        socketInstance.emit('calibrate', msg);
-    };
-    
-    function NetworkDataSource(inputBcaster, outputBcaster) {
-        inputBcaster.vent.rawData.add(sendMessage);
-        
-        // Occasionally send calibration updates
-        // (just in case the sensor gets moved?)
-        inputBcaster.vent.rawData.add(_.throttle(sendCalibrationData, 10000));
-        
-        this.ondata = socketInstance.on('response', function (data) {
+    function NetworkDataSource(inputBcaster, outputBcaster, url) {
+        this.socketInstance = io.connect(url || 'http://localhost:3000');
+        this.outputBcaster = outputBcaster;
+        inputBcaster.vent.rawData.add(this.sendMessage);
+    }
+
+    NetworkDataSource.prototype.start = function () {
+        var that = this;
+        this.socketInstance.on('response', function (data) {
             //console.log('Server returned data');
             //console.log(data);
             
-            outputBcaster.broadcastUser(data);
+            that.outputBcaster.broadcastUser(data);
         });
-    }
+    };
+    
+    NetworkDataSource.prototype.stop = function () {
+        this.socketInstance.off('response');
+    };
+    
+    NetworkDataSource.prototype.sendMessage = function (msg) {
+        this.socketInstance.emit('request', msg);
+    };
+    
+    NetworkDataSource.prototype.sendCalibrationData = function (msg) {
+        console.log('calibrating');
+        this.socketInstance.emit('calibrate', msg);
+    };
     
     NetworkDataSource.prototype.joinRoom = function (roomId) {
         console.log("Joining room");
-        socketInstance.emit('subscribe', roomId);
+        this.socketInstance.emit('subscribe', roomId);
     };
     
     NetworkDataSource.prototype.close = function () {
-        socketInstance.off('response', this.ondata);
-        socketInstance.leave();
+        this.socketInstance.off('response', this.ondata);
+        this.socketInstance.leave();
     };
     
     return NetworkDataSource;
