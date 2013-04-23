@@ -1,7 +1,7 @@
 "use strict";
 
-// Take a whole skeleton's worth of data
-// and just pull out the bits of interest to you
+// Takes a whole skeleton's worth of data
+// and just pulls out the bits of interest to you
 define([
 ], function () {
     var extractJointData = function (jointId, skeleton) {

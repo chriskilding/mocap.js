@@ -1,5 +1,9 @@
 "use strict";
 
+// Place an instance of this between a Broadcaster and your code
+// which is only interested in looking at a certain Joint, then
+// subscribe to the JointUpdater's events in your own code to
+// receive a filtered stream of data.
 define([
     'underscore',
     'js-signals',

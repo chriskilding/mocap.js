@@ -1,18 +1,24 @@
 "use strict";
 
 // A networked skeleton data source!
-// Sends data from this client's sensor to the reconstruct-o-matic
-// and receives an aggregated (hopefully more accurate and robust)
-// skeleton model back.
-// Optionally, don't send data if you just want to listen
-// or act as a 'viewer' client
+//
+// allows streaming motion capture over a socket.io network connection
+// from any compatible source; originally this was designed for use with
+// the reconstruct-o-matic server
+// (https://github.com/themasterchef/reconstruct-o-matic).
+//
+// If you have a locally installed sensor you can send your data stream
+// up to this server to assist in the reconstruction of the skeleton;
+// more sensors will increase the accuracy of the result. If you do not
+// have a locally connected sensor, you can subscribe to a
+// NetworkDataSource in read-only mode.
 define([
     'socketio'
 ], function (io) {
     function NetworkDataSource(inputBcaster, outputBcaster, url) {
         this.socketInstance = io.connect(url || 'http://localhost:3000');
         this.outputBcaster = outputBcaster;
-        inputBcaster.vent.rawData.add(this.sendMessage);
+        inputBcaster.vent.rawData.add(this.sendMessage, this);
     }
 
     NetworkDataSource.prototype.start = function () {

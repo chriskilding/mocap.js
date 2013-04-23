@@ -1,8 +1,9 @@
 "use strict";
 
-// Enumerates common groups of body joints
-// that you might want to examine together
-// to look for patterns
+// In some applications, it may be useful to track not only an individual
+// Joint but also its neighboring joints, particularly if analysing
+// patterns of motion localised to some part of the body. JointGroups
+// is a convenience enum which links every Joint to its neighbors.
 define([
     'mocap/datasource/Joints'
 ], function (Joints) {

@@ -1,6 +1,9 @@
 "use strict";
 
-// Enumerates the tracked body joints
+// A convenience enumeration of all the tracked body joints, mapping
+// human-readable names e.g. RightHand to their (arbitrary and hard
+// to remember) numerical ID in the received data packets. This may
+// help you to write less error-prone code when using mocapjs.
 define([
 ], function () {
   

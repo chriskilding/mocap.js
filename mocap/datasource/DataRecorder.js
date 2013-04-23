@@ -1,6 +1,10 @@
 "use strict";
 
 // A geometry recorder.
+//
+// This is a fairly simple utility which is intended to be wired up
+// to your Broadcaster or JointUpdater of choice, and records the data
+// stream from the moment you call `start()` to the moment you call `stop()`.
 define([
     'underscore'
 ], function (_) {

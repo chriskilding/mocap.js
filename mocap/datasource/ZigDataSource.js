@@ -1,7 +1,8 @@
 /*jslint browser: true */
 "use strict";
 
-// The zig plugin wrapper
+// Allows direct capture from a local copy of the ZigFu zig.js plugin,
+// and a locally connected compatible sensor like the Microsoft Kinect.
 define([
     'zig',
     'mocap/datasource/Joints'
