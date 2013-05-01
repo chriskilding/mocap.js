@@ -53,7 +53,8 @@ if (location.href.indexOf('-dist') !== -1) {
 var testModules = [
     "datasource/BroadcasterTests.js",
     "datasource/JointUpdaterTests.js",
-    "datasource/JointUpdaterDepTests.js"
+    "datasource/JointUpdaterDepTests.js",
+    "datasource/DataRecorderTests.js"
 ];
 
 // Resolve all testModules and then start the Test Runner.
