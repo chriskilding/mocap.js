@@ -4,8 +4,6 @@ define(function (require) {
 	// Import dependencies.
 	var DataRecorder = require("mocap/datasource/DataRecorder");
 	
-    var user = JSON.parse(require("text!mocap/sample-user.json"));
-    
     var recorder;
   
 	// Define the QUnit module and lifecycle.
@@ -14,10 +12,8 @@ define(function (require) {
             // Testing timeouts is messy
             // so don't bother with the custom time value for now
             recorder = new DataRecorder();
-            //sinon.spy(bcaster.vent.rawData, "dispatch");
         },
         teardown: function () {
-            //bcaster.vent.rawData.dispatch.restore(); // For safety
             recorder = null;
         }
 	});
