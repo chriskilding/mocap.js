@@ -9,9 +9,6 @@
     define('socketio', function () {
         return io;
     });
-    define('zig', function () {
-        return zig;
-    });
     
     //Use almond's special top-level, synchronous require
     // to trigger factory functions,
