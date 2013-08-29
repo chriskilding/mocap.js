@@ -6,11 +6,10 @@ define([
 ], function (_) {
     'use strict';
     
-    function ServerSentEventsSource(inputBcaster, outputBcaster, url) {
+    function ServerSentEventsSource(bcaster, url) {
         this.source = new EventSource(url || '/skeleton');
         
-        this.outputBcaster = outputBcaster;
-        inputBcaster.vent.rawData.add(this.sendMessage, this);
+        this.bcaster = bcaster;
     }
 
     ServerSentEventsSource.prototype.start = function () {
@@ -19,13 +18,13 @@ define([
             
             // No point broadcasting null or invalid data
             if (e && e.data) {
-                this.outputBcaster.broadcastUser(e.data);
+                this.bcaster.broadcastUser(e.data);
             }
         }, this), false);
     };
     
     ServerSentEventsSource.prototype.stop = function () {
-        this.socketInstance.off('response');
+        this.source.removeEventListener('message');
     };
         
     return ServerSentEventsSource;
