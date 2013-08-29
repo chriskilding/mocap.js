@@ -7,7 +7,7 @@ define([
     'use strict';
     
     function ServerSentEventsSource(bcaster, url) {
-        this.source = new EventSource(url || '/skeleton');
+        this.source = new EventSource(url);
         
         this.bcaster = bcaster;
     }
